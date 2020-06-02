@@ -1,0 +1,40 @@
+```{r, echo=FALSE}
+any_params <- c(params$jira, 
+  params$github, 
+  params$twitter, 
+  params$linkedin, 
+  params$confluence
+  )
+
+links_supplied <- !all(is.na(any_params))
+```
+
+```{r Populate icon links, eval = links_supplied, echo=FALSE}
+library(fontawesome)
+library(tibble)
+rowname <- c("github", "twitter", "linkedin", "jira", "confluence")
+icons <- sapply(rowname, fa, fill=params$icon_fill)
+
+key <- data.frame(rowname, icons, stringsAsFactors = FALSE) %>%
+  filter(rowname %in% names(params)) %>%
+  left_join(rownames_to_column(data.frame(cbind(params), stringsAsFactors=FALSE)), by = "rowname") %>%
+  rowwise %>%
+  mutate(el = gsub("<svg", paste0("<a href='", params,"'><svg"), icons)) %>%
+  mutate(el = gsub("</svg", paste0("</svg><a"), el))
+
+links <- paste0(key$el, collapse = "")
+```
+
+
+```{r, eval=links_supplied, echo=FALSE}
+library(knitr)
+asis_output('<style>
+[id*="tocify-header"]:last-of-type {
+font-size: 3rem;
+cursor: unset;
+letter-spacing: 2rem;
+}</style>')
+
+asis_output(paste0("## ", links, "{#social-links} \n"))
+```
+

@@ -1,0 +1,110 @@
+---
+params:
+  title: "Chicken Fries"
+  accent_color: "#185494"
+  icon_fill: "#FAAF18"
+  jira: "https://www.atlassian.com/software/jira"
+  github: "https://github.com"
+  confluence: "https://www.atlassian.com/software/confluence"
+  logo_url: "https://brandpalettes.com/wp-content/uploads/2018/07/Burger_King_Logo.jpg"
+  logo_height: "150px"
+title: '`r params$title`'
+author: '`r Sys.info()[7]`'
+date: '`r Sys.time()`'
+output: 
+  html_document:
+    # include:
+    #   after_body: "footer.html"
+    code_folding: hide
+    code_download: true
+    create_dir: true
+    df_print: paged
+    # keep_md: true
+    toc: true
+    toc_float: 
+      collapsed: false
+      smooth_scroll: false
+---
+
+```{r Styles from Params, eval=FALSE, echo=FALSE, results='asis'}
+res <- knitr::knit_child('head.Rmd', quiet = TRUE)
+cat(res, sep = '\n')
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(ggplot2)
+  library(scales)
+  library(DT)
+})
+```
+
+## Background {.tabset}
+
+Words ^[1]
+
+[1]: footnote
+
+### Flowchart
+
+```{r, results="asis"}
+htmltools::HTML('
+  <div class="mermaid">
+  graph LR
+      A --- B
+      B-->C
+      B-->D
+  </div>
+  ')
+```
+
+### User Journey 
+
+```{r, results="asis"}
+htmltools::HTML('
+  <div class="mermaid">
+journey
+    title My working day
+    section Go to work
+      Make tea: 5: Me
+      Go upstairs: 3: Me
+      Do work: 1: Me, Cat
+    section Go home
+      Go downstairs: 5: Me
+      Sit down: 5: Me
+  </div>
+  ')
+```
+## Data Prep {.fixed-height}
+
+## Codebook {.fixed-height}
+
+```{r}
+datatable(head(iris))
+```
+
+## Findings {.tabset}
+
+### One
+
+### Two 
+
+### Three
+
+## Appendix
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+<details><summary>R Session Info</summary>
+```{r}
+sessionInfo()
+```
+</details>
+
+```{r Icons from Params, eval=FALSE, echo=FALSE, results='asis'}
+res <- knitr::knit_child('icons.Rmd', quiet = TRUE)
+cat(res, sep = '\n')
+```
