@@ -1,13 +1,15 @@
 ---
 params:
-  title: "Chicken Fries"
-  accent_color: "#185494"
-  icon_fill: "#FAAF18"
+  title: "Untitled"
+  accent_color: "#c82502"
+  icon_fill: "black"
   jira: "https://www.atlassian.com/software/jira"
   github: "https://github.com"
   confluence: "https://www.atlassian.com/software/confluence"
-  logo_url: "https://brandpalettes.com/wp-content/uploads/2018/07/Burger_King_Logo.jpg"
-  logo_height: "150px"
+  linkedin: "https://linkedin.com"
+  twitter: "https://twitter.com"
+  logo_url: "https://hbr.org/resources/css/images/HBR_logo_black.svg"
+  logo_height: "100px"
 title: '`r params$title`'
 author: '`r Sys.info()[7]`'
 date: '`r Sys.time()`'
@@ -26,7 +28,7 @@ output:
       smooth_scroll: false
 ---
 
-```{r Styles from Params, eval=FALSE, echo=FALSE, results='asis'}
+```{r Styles from Params, echo=FALSE, results='asis'}
 res <- knitr::knit_child('head.Rmd', quiet = TRUE)
 cat(res, sep = '\n')
 ```
@@ -104,7 +106,7 @@ sessionInfo()
 ```
 </details>
 
-```{r Icons from Params, eval=FALSE, echo=FALSE, results='asis'}
+```{r Icons from Params, echo=FALSE, results='asis'}
 res <- knitr::knit_child('icons.Rmd', quiet = TRUE)
 cat(res, sep = '\n')
 ```
